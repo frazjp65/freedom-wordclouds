@@ -9,7 +9,7 @@ makeWordCloud <- function(inFile, outFile) {
   docs <- tm_map(docs, content_transformer(tolower))
   docs <- tm_map(docs, removeNumbers)
   docs <- tm_map(docs, removeWords, stopwords("english"))
-  docs <- tm_map(docs, removeWords, c("will", "shall"))
+  docs <- tm_map(docs, removeWords, c("will", "shall", "hath", "may"))
   docs <- tm_map(docs, removePunctuation)
   docs <- tm_map(docs, stripWhitespace)
   
@@ -19,7 +19,7 @@ makeWordCloud <- function(inFile, outFile) {
   d <- data.frame(word = names(v),freq=v)
   head(d, 10)
   
-  set.seed(1234)
+  set.seed(46191)
   
   png(filename=outFile)
   wordcloud(words = d$word, freq = d$freq, min.freq = 1,
